@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 19:01:47 by sabra             #+#    #+#             */
-/*   Updated: 2020/11/26 20:31:05 by sabra            ###   ########.fr       */
+/*   Created: 2020/11/26 19:02:25 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/27 14:47:47 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#ifndef PRINTF_H
+# define PRINTF_H
 
-int		ft_printf(const char *, ...)
+# include <stdarg.h>
+# include "libft.h"
+
+typedef struct	t_struct
 {
-	int	count;
+	int		minus;
+	int		zero;
+	int		width;
+	int		dot_star;
+	int		lenght;
+}				s_struct;
 
-	if ((count = ft_parser()))
-}
+int		ft_printf(const char *input, ...);
+int		ft_write_start(char *str);
+
+#endif
