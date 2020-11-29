@@ -6,11 +6,11 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:01:47 by sabra             #+#    #+#             */
-/*   Updated: 2020/11/27 16:28:38 by sabra            ###   ########.fr       */
+/*   Updated: 2020/11/28 13:49:09 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/printf.h"
+#include "../includes/printf.h"
 
 int	ft_printf(const char *input, ...)
 {
@@ -18,5 +18,17 @@ int	ft_printf(const char *input, ...)
 	va_list args;
 
 	va_start(args, input);
-	if ((count = ft_parser()))
+	count = ft_write_common(input, args, 0);
+	va_end(args);
+	return (count);
+}
+
+int main (void)
+{
+    int k;
+    //k = ft_printf("hello world %02.5d\n", 10);
+    printf("%-5c", 'k');
+    printf("\n%d", k);
+
+	return (0);
 }

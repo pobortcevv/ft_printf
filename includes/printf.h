@@ -6,7 +6,7 @@
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:02:25 by sabra             #+#    #+#             */
-/*   Updated: 2020/11/27 14:47:47 by sabra            ###   ########.fr       */
+/*   Updated: 2020/11/28 13:52:16 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define PRINTF_H
 
 # include <stdarg.h>
-# include "libft.h"
+# include "../libft/libft.h"
+# include <stdio.h>
 
 typedef struct	t_struct
 {
@@ -23,9 +24,10 @@ typedef struct	t_struct
 	int		width;
 	int		dot_star;
 	int		lenght;
+	char	type;
 }				s_struct;
 
 int		ft_printf(const char *input, ...);
-int		ft_write_start(char *str);
+int		ft_write_common(const char *str, va_list args, int i);
 
 #endif

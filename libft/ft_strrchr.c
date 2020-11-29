@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngragas <ngragas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 12:48:22 by ngragas           #+#    #+#             */
-/*   Updated: 2020/11/12 19:27:09 by ngragas          ###   ########.fr       */
+/*   Created: 2020/11/01 14:56:03 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/04 12:09:47 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,26 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char	*res = (*s == (char)c ? s : NULL);
+	int		i;
+	char	*str;
+	int		last_index;
+	size_t	len;
 
-	while (*s)
-		if (*++s == (char)c)
-			res = s;
-	return ((char *)res);
+	last_index = -1;
+	str = (char *)s;
+	i = 0;
+	len = ft_strlen(str);
+	while (str[i] != '\0')
+	{
+		if (str[i] == (char)c)
+		{
+			last_index = i;
+		}
+		i++;
+	}
+	if (last_index != -1)
+		return (&str[last_index]);
+	else if ((char)c == str[len])
+		return (&str[len]);
+	return (NULL);
 }

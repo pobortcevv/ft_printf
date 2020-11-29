@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngragas <ngragas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 20:54:11 by ngragas           #+#    #+#             */
-/*   Updated: 2020/11/20 15:38:49 by ngragas          ###   ########.fr       */
+/*   Created: 2020/11/04 14:52:26 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/09 16:01:35 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	size_t	i;
 	char	*substr;
-	char	*cur;
-	size_t	src_len;
+	char	*string;
 
 	if (!s)
 		return (NULL);
-	if (len && (src_len = ft_strlen(s)) > start)
+	if (start >= ft_strlen(s))
 	{
-		src_len -= start;
-		len = 1 + (len < src_len ? len : src_len);
-		if (!(substr = malloc(len)))
-			return (NULL);
-		cur = substr;
-		s += start;
-		while (--len)
-			*cur++ = *s++;
-		*cur = '\0';
+		substr = (char *)malloc(1);
+		substr[0] = '\0';
+		return (substr);
 	}
-	else
-		return (ft_calloc(1, 1));
+	if (!(substr = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	string = (char *)s;
+	i = 0;
+	while (len-- && string[start])
+	{
+		substr[i] = string[start];
+		i++;
+		start++;
+	}
+	substr[i] = '\0';
 	return (substr);
 }

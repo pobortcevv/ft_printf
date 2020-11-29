@@ -3,41 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngragas <ngragas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 21:40:07 by ngragas           #+#    #+#             */
-/*   Updated: 2020/11/18 19:23:22 by ngragas          ###   ########.fr       */
+/*   Created: 2020/11/05 23:00:15 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/08 18:59:55 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** Variable "digits[10]" holds negative sign
-*/
+size_t	ft_num_len(long int n)
+{
+	size_t	len;
+
+	len = 1;
+	if (n < 0)
+		len++;
+	if (n != 0)
+	{
+		len = 0;
+		if (n < 0)
+			len++;
+		while (n != 0)
+		{
+			n /= 10;
+			len++;
+		}
+	}
+	return (len);
+}
+
+char	*ft_num_convert(long int n, char *str, size_t len)
+{
+	str[len] = '\0';
+	if (n < 0)
+	{
+		str[0] = '-';
+		n = -n;
+	}
+	if (n == 0)
+		str[0] = '0';
+	else
+	{
+		len--;
+		while (n != 0)
+		{
+			str[len] = (n % 10) + '0';
+			n /= 10;
+			len--;
+		}
+	}
+	return (str);
+}
 
 char	*ft_itoa(int n)
 {
-	char			*str;
-	unsigned char	i;
-	unsigned char	k;
-	unsigned char	digits[11];
+	size_t		len;
+	long int	num;
+	char		*str;
 
-	digits[10] = n < 0;
-	i = !n;
-	digits[0] = '0';
-	while (n)
-	{
-		digits[i++] = '0' + n % 10 * ((n > 0) - digits[10]);
-		n /= 10;
-	}
-	if (!(str = malloc(digits[10] + i + 1)))
+	num = (long int)n;
+	len = ft_num_len(num);
+	if (!(str = (char *)malloc(sizeof(char) * len + 1)))
 		return (NULL);
-	k = digits[10];
-	if (k)
-		str[0] = '-';
-	while (i)
-		str[k++] = (char)digits[--i];
-	str[k] = '\0';
-	return (str);
+	return (ft_num_convert(num, str, len));
 }

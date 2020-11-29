@@ -3,40 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngragas <ngragas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 13:09:30 by ngragas           #+#    #+#             */
-/*   Updated: 2020/11/12 18:52:15 by ngragas          ###   ########.fr       */
+/*   Created: 2020/11/01 17:25:08 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/11 20:59:27 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char    *ft_strnstr(char *str1, char *str2, size_t size)
 {
-	const char	*check_haystack;
-	const char	*check_needle;
-	size_t		needle_len;
-
-	if (!*needle)
-		return ((char *)haystack);
-	needle_len = ft_strlen(needle);
-	if (!len || (*haystack && len < needle_len))
-		return (NULL);
-	len -= needle_len - 1;
-	while (len && *haystack)
-	{
-		if (*haystack == *needle)
-		{
-			check_haystack = haystack + 1;
-			check_needle = needle + 1;
-			while (*check_needle && *check_haystack++ == *check_needle)
-				check_needle++;
-			if (!*check_needle)
-				return ((char *)haystack);
-		}
-		haystack++;
-		len--;
-	}
-	return (NULL);
+    size_t      j;
+    size_t      i;
+    i = 0;
+    if (!(*str2))
+        return (str1);
+    while (str1[i] != '\0' && i < size)
+    {
+        j = 0;
+        while (str2[j] == str1[i + j] && (i + j) < size)
+        {
+            if (str2[j + 1] == '\0')
+                return (str1 + i);
+            j++;
+        }
+        i++;
+    }
+    return (NULL);
 }

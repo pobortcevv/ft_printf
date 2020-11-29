@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngragas <ngragas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/20 20:58:12 by ngragas           #+#    #+#             */
-/*   Updated: 2020/11/20 21:09:29 by ngragas          ###   ########.fr       */
+/*   Created: 2020/11/06 19:29:57 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/08 18:54:48 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list	*cur;
-	t_list	*next;
+	t_list	*elem;
+	t_list	*list;
 
-	cur = *lst;
-	while (cur)
+	list = *lst;
+	while (list)
 	{
-		next = cur->next;
-		del(cur->content);
-		free(cur);
-		cur = next;
+		elem = list->next;
+		if (del)
+			del(list->content);
+		free(list);
+		list = elem;
 	}
 	*lst = NULL;
 }

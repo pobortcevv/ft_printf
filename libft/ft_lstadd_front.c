@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngragas <ngragas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/20 20:41:40 by ngragas           #+#    #+#             */
-/*   Updated: 2020/11/20 22:49:11 by ngragas          ###   ########.fr       */
+/*   Created: 2020/11/06 16:12:19 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/08 18:56:50 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (!new)
-		return ;
 	new->next = *lst;
 	*lst = new;
 }

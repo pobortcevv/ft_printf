@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngragas <ngragas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/04 21:31:13 by ngragas           #+#    #+#             */
-/*   Updated: 2020/11/20 13:55:27 by ngragas          ###   ########.fr       */
+/*   Created: 2020/11/03 12:59:19 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/04 11:12:39 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_isascii(int c)
+int		ft_isascii(int character)
 {
-	return ('\0' <= c && c <= 127);
+	if (character >= 0 && character <= 127)
+	{
+		return (1);
+	}
+	return (0);
 }

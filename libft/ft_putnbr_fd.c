@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngragas <ngragas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/18 15:04:54 by ngragas           #+#    #+#             */
-/*   Updated: 2020/11/20 20:15:00 by ngragas          ###   ########.fr       */
+/*   Created: 2020/11/06 10:11:00 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/09 16:33:03 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,19 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char			sign;
-	unsigned char	i;
-	char			digits[11];
+	long int n1;
 
-	if (!n)
+	n1 = (long int)n;
+	if (n1 < 0)
 	{
-		write(fd, "0", 1);
-		return ;
+		n1 = -n1;
+		ft_putchar_fd('-', fd);
 	}
-	sign = (n > 0) - (n < 0);
-	i = 11;
-	while (n)
+	if (n1 < 10)
+		ft_putchar_fd(n1 + 48, fd);
+	else
 	{
-		digits[--i] = '0' + n % 10 * sign;
-		n /= 10;
+		ft_putnbr_fd(n1 / 10, fd);
+		ft_putnbr_fd(n1 % 10, fd);
 	}
-	if (sign < 0)
-		digits[--i] = '-';
-	write(fd, &digits[i], 11 - i);
 }

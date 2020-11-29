@@ -5,33 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 16:29:16 by ngragas           #+#    #+#             */
-/*   Updated: 2020/11/21 14:21:47 by sabra            ###   ########.fr       */
+/*   Created: 2020/07/20 14:57:57 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/04 14:47:16 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <limits.h>
-#include <stdio.h>
 
-int	ft_atoi(const char *str)
+int				ft_space(char sym)
 {
-	int		num;
-	char	sign;
-
-	num = 0;
-	while (('\t' <= *str && *str <= '\r') || *str == ' ')
-		str++;
-	sign = (*str == '-' || *str == '+') ? 44 - *str++ : 1;
-	while ('0' <= *str && *str <= '9')
-		num = num * 10 + sign * (*str++ - '0');
-	return (num);
+	if (sym == ' ' || (sym >= 9 && sym <= 13))
+		return (1);
+	return (0);
 }
 
-int main(void)
+int				ft_atoi(const char *str)
 {
-	int result;
+	int			i;
+	int			sign;
+	long int	result;
 
-	result = ft_atoi("-2147483649");
-	printf("%d", result);
+	i = 0;
+	sign = 1;
+	result = 0;
+	while (ft_space(str[i]))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = (result * 10) + (str[i++] - '0');
+		if (result > 2147483647 && sign == 1)
+			return (-1);
+		else if (result < -2147483648 && sign == -1)
+			return (0);
+	}
+	return (result * sign);
 }
