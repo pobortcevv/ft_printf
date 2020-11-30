@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.h                                        :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/27 17:07:44 by sabra             #+#    #+#             */
-/*   Updated: 2020/11/28 11:42:50 by sabra            ###   ########.fr       */
+/*   Created: 2020/11/26 19:02:25 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/28 13:52:16 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PARSER_H
-# define FT_PARSER_H
+#ifndef PRINTF_H
+# define PRINTF_H
 
-# include "printf.h"
+# include <stdarg.h>
+# include "./libft/libft.h"
+# include <stdio.h>
+//# include "ft_processor.h"
+//# include "ft_parser.h"
 
-s_struct	ft_minus_init(s_struct flgs);
-s_struct	ft_width_init(const char *str, s_struct flgs, int i, va_list args);
-s_struct	ft_dot_star_init(const char *str, s_struct flgs, int i, va_list args);
+typedef struct	t_struct
+{
+	int		minus;
+	int		zero;
+	int		width;
+	int		dot_star;
+	int		lenght;
+	char	type;
+}				s_struct;
+
+int		ft_printf(const char *input, ...);
+int		ft_write_common(const char *str, va_list args, int i);
 
 #endif

@@ -33,6 +33,7 @@ SRCS	= ${SRCDIR}ft_memset.c \
 		  ${SRCDIR}ft_putstr_fd.c \
 		  ${SRCDIR}ft_putendl_fd.c \
 		  ${SRCDIR}ft_putnbr_fd.c \
+		  ${SRCDIR}ft_putnbr16_fd.c \
 		  ${SRCDIR}ft_strlen.c
 OBJS			= $(SRCS:.c=.o)
 

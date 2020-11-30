@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 19:02:25 by sabra             #+#    #+#             */
-/*   Updated: 2020/11/28 13:52:16 by sabra            ###   ########.fr       */
+/*   Created: 2020/11/26 19:01:47 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/28 13:49:09 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#include "printf.h"
 
-# include <stdarg.h>
-# include "../libft/libft.h"
-# include <stdio.h>
-
-typedef struct	t_struct
+int	ft_printf(const char *input, ...)
 {
-	int		minus;
-	int		zero;
-	int		width;
-	int		dot_star;
-	int		lenght;
-	char	type;
-}				s_struct;
+	int	count;
+	va_list args;
 
-int		ft_printf(const char *input, ...);
-int		ft_write_common(const char *str, va_list args, int i);
+	va_start(args, input);
+	count = ft_write_common(input, args, 0);
+	va_end(args);
+	return (count);
+}
 
-#endif
+int main (void)
+{
+    int k;
+    k = ft_printf("%10.15X", -100);
+//	printf("/");
+    printf("\n%10.15X", -100);
+
+	return (0);
+}

@@ -2,6 +2,8 @@
 
 int main (void)
 {
+	int printed;
 	//printf("%-6s\n","kekwloljopalox");
-	printf("test = %010d", 100);
+	printed = printf("test = %10d", 100);
+	printf("\nprinted = %d", printed);
 }

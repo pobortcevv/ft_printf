@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_parser.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 19:01:47 by sabra             #+#    #+#             */
-/*   Updated: 2020/11/28 13:49:09 by sabra            ###   ########.fr       */
+/*   Created: 2020/11/27 17:07:44 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/28 11:42:50 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/printf.h"
+#ifndef FT_PARSER_H
+# define FT_PARSER_H
 
-int	ft_printf(const char *input, ...)
-{
-	int	count;
-	va_list args;
+# include "printf.h"
+# include "ft_processor.h"
 
-	va_start(args, input);
-	count = ft_write_common(input, args, 0);
-	va_end(args);
-	return (count);
-}
+s_struct	ft_minus_init(s_struct flgs);
+s_struct	ft_width_init(const char *str, s_struct flgs, int i, va_list args);
+s_struct	ft_dot_star_init(const char *str, s_struct flgs, int i, va_list args);
 
-int main (void)
-{
-    int k;
-    //k = ft_printf("hello world %02.5d\n", 10);
-    printf("%-5c", 'k');
-    printf("\n%d", k);
-
-	return (0);
-}
+#endif

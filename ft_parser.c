@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/printf.h"
-#include "../includes/ft_parser.h"
+#include "printf.h"
+#include "ft_parser.h"
+#include "ft_processor.h"
 
 s_struct	struct_init(void)
 {
@@ -26,30 +27,33 @@ s_struct	struct_init(void)
 	return (flgs);
 }
 
-void		ft_parser(const char *str, int i, va_list args)
+int		ft_parser(const char *str, int i, va_list args, int count)
 {
 	s_struct flgs;
 	
 	flgs = struct_init();
 	while (flgs.type == '\0')
 	{
-		if (str[i] == '0' && flgs.minus == 0)
+		if (str[i] == '0' && flgs.minus == 0 && str[i - 1] == '%')
 			flgs.zero = 1;
 		else if (str[i] == '-')
 			flgs = ft_minus_init(flgs);
         else if (str[i] == '.')
             flgs = ft_dot_star_init(str, flgs, i, args);
-		else if (((str[i] >= 1 && str[i] <= '9') || str[i] == '*')&& flgs.dot_star == 0)
+		else if (((str[i] >= 1 && str[i] <= '9') || str[i] == '*') && flgs
+		.dot_star == 0 && flgs.width == 0)
 			flgs = ft_width_init(str, flgs, i, args);
 		else if (ft_isalpha(str[i]))
 			flgs.type = str[i];
 		i++;
     }
-    flgs.lenght = flgs.width + flgs.dot_star;
+	flgs.lenght = flgs.width + flgs.dot_star;
     // Здесь будет функция обработки флагов
+    count += ft_type_init(flgs, args);
     // А здесь уже будет функция ft_write_common
-	printf("\nminus = %d\nzero = %d\nwidth = %d\ndot_star = %d\nlen = %d\ntype = %c",
-        flgs.minus, flgs.zero, flgs.width, flgs.dot_star, flgs.lenght, flgs.type);
+//	printf("\nminus = %d\nzero = %d\nwidth = %d\ndot_star = %d\nlen = %d\ntype = %c",
+//		flgs.minus, flgs.zero, flgs.width, flgs.dot_star, flgs.lenght, flgs.type);
+	return (count);
 }
 
 int			ft_write_common(const char *str, va_list args, int i)
@@ -61,8 +65,7 @@ int			ft_write_common(const char *str, va_list args, int i)
     {
 		if (str[i] == '%')
         {
-			ft_parser(str, i, args);
-			return (count);
+			count = ft_parser(str, i, args, count);
 		}
 		ft_putchar_fd(str[i], 1);
 		count++;
