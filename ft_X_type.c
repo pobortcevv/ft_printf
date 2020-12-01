@@ -26,6 +26,8 @@ int		ft_dot_star_X(unsigned int num, s_struct flgs, int count)
 	if (flgs.minus == 1)
 	{
 		ft_putnull_X(flgs.dot_star);
+		if (num == 0 && flgs.dot_star == 0)
+			return (count);
 		ft_putnbr16_fd(num, 1, "0123456789ABCDEF");
 	}
 	while (flgs.width > 0)
@@ -36,6 +38,8 @@ int		ft_dot_star_X(unsigned int num, s_struct flgs, int count)
 	if (flgs.minus == 0)
 	{
 		ft_putnull_X(flgs.dot_star);
+		if (num == 0 && flgs.dot_star == 0)
+			return (count);
 		ft_putnbr16_fd(num, 1, "0123456789ABCDEF");
 	}
 	return (count);
@@ -56,7 +60,7 @@ int		ft_X_type(s_struct flgs, va_list args)
 		count++;
 	}
 	flgs.width -= count;
-	if (flgs.dot_star != 0)
+	if (flgs.dot_star >= 0)
 	{
 		count += ft_dot_star_X(num, flgs, count);
 		return (count);

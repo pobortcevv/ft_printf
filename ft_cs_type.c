@@ -17,12 +17,19 @@ int		ft_s_type(s_struct flgs, va_list args)
 	char	*str;
 	int		count;
 
-	count = flgs.dot_star;
 	str = va_arg(args, char *);
-	flgs.width -= (ft_strlen(str) - flgs.dot_star + 1);
+	if (flgs.dot_star >= 0)
+	{
+		count = flgs.dot_star;
+	}
+	else
+	{
+		count = ft_strlen(str);
+	}
+	flgs.width -= (count);
 	if (flgs.minus == 1)
 	{
-		if (flgs.dot_star != 0)
+		if (flgs.dot_star >= 0)
 		{
 			while ((flgs.dot_star)--)
 			{
@@ -45,9 +52,9 @@ int		ft_s_type(s_struct flgs, va_list args)
 	}
 	if (flgs.minus == 0)
 	{
-		if (flgs.dot_star != 0)
+		if (flgs.dot_star >= 0)
 		{
-			while ((flgs.dot_star)--)
+			while ((flgs.dot_star)-- > 0)
 			{
 				ft_putchar_fd(*str, 1);
 				str++;
@@ -69,7 +76,7 @@ int		ft_c_type(s_struct flgs, va_list args)
 		ft_putchar_fd(va_arg(args, int), 1);
 		(flgs.width)--;
 	}
-	count = (flgs.width > 0 ? count + flgs.width : count);
+	count = (flgs.width > count ? flgs.width : count);
 	while (flgs.width > 1)
 	{
 		ft_putchar_fd(' ', 1);

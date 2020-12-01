@@ -24,12 +24,14 @@ s_struct	ft_width_init(const char *str, s_struct flgs, int i, va_list args)
 	if (ft_isdigit(str[i]))
 	{
 		flgs.width = ft_atoi(&str[i]);
+
 	}
 	else if (str[i] == '*')
 	{
 		flgs.width = va_arg(args, int);
 		if (flgs.width < 0)
 			flgs.width *= -1;
+
 	}
 	return (flgs);
 }

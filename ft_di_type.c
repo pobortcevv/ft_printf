@@ -19,19 +19,29 @@ int 	ft_putnull(int num, int len)
 		num *= -1;
 		ft_putchar_fd('-', 1);
 	}
-	while (len--)
-		ft_putchar_fd('0', 1);
+	if (len > 1)
+	{
+		while (len--)
+			ft_putchar_fd('0', 1);
+	}
 	return (num);
 }
 
 int		ft_dot_star_di(int num, s_struct flgs, int count)
 {
-	flgs.dot_star -= (count - 1);
-	count += (flgs.width + flgs.dot_star);
-	flgs.width -= flgs.dot_star;
+	if (num < 0)
+		flgs.dot_star -= (count - 1);
+	else
+		flgs.dot_star -= count;
+	if (flgs.dot_star >= 0)
+		flgs.width -= flgs.dot_star + count;
+	else
+		flgs.width -= count;
 	if (flgs.minus == 1)
 	{
 		num = ft_putnull(num, flgs.dot_star);
+		if (num == 0)
+			return (flgs.lenght);
 		ft_putnbr_fd(num, 1);
 	}
 	while (flgs.width > 0)
@@ -42,9 +52,11 @@ int		ft_dot_star_di(int num, s_struct flgs, int count)
 	if (flgs.minus == 0)
 	{
 		num = ft_putnull(num, flgs.dot_star);
+		if (num == 0)
+			return (flgs.lenght);
 		ft_putnbr_fd(num, 1);
 	}
-	return (count);
+	return (count > flgs.lenght ? count : flgs.lenght);
 }
 
 int		ft_di_type(s_struct flgs, va_list args)
@@ -59,6 +71,7 @@ int		ft_di_type(s_struct flgs, va_list args)
 	if (buff < 0)
 	{
 		buff *= -1;
+		//flgs.lenght++;
 		count++;
 	}
 	while (buff > 0)
@@ -66,16 +79,17 @@ int		ft_di_type(s_struct flgs, va_list args)
 		buff /= 10;
 		count++;
 	}
-	flgs.width -= count;
-	if (flgs.dot_star != 0)
+	if (flgs.dot_star >= 0)
 	{
-		count += ft_dot_star_di(num, flgs, count);
-		return (count);
+		ft_dot_star_di(num, flgs, count);
+		return (count > flgs.lenght ? count : flgs.lenght);
 	}
+	flgs.width -= count;
 	if (flgs.minus == 1)
 	{
+
 		ft_putnbr_fd(num, 1);
-		while ((flgs.width)--)
+		while ((flgs.width)-- > 0)
 			ft_putchar_fd(' ', 1);
 	}
 	else if (flgs.zero == 1)
@@ -85,9 +99,9 @@ int		ft_di_type(s_struct flgs, va_list args)
 	}
 	else
 	{
-		while ((flgs.width)--)
+		while ((flgs.width)-- > 0)
 			ft_putchar_fd(' ', 1);
 		ft_putnbr_fd(num, 1);
 	}
-	return (count);
+	return (count > flgs.lenght ? count : flgs.lenght);
 }

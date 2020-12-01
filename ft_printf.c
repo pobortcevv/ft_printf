@@ -26,8 +26,12 @@ int	ft_printf(const char *input, ...)
 int main (void)
 {
     int k;
-    k = ft_printf("%10.15X\n%d", -100, 10);
+    int or;
+
+	k = ft_printf("%40.20p", "creed");
+	or = printf("\n%40.20p", "creed");
 //	printf("/");
-    printf("\n%10.15X\n%d", -100, 10);
+	printf("\nmy = %d", k);
+    printf("\nor = %d", or - 1);
 	return (0);
 }
