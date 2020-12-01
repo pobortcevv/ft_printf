@@ -15,8 +15,8 @@
 int	ft_printf(const char *input, ...)
 {
 	int	count;
-	va_list args;
 
+	va_list args;
 	va_start(args, input);
 	count = ft_write_common(input, args, 0);
 	va_end(args);
@@ -26,9 +26,8 @@ int	ft_printf(const char *input, ...)
 int main (void)
 {
     int k;
-    k = ft_printf("%10.15X", -100);
+    k = ft_printf("%10.15X\n%d", -100, 10);
 //	printf("/");
-    printf("\n%10.15X", -100);
-
+    printf("\n%10.15X\n%d", -100, 10);
 	return (0);
 }
