@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_processor.h"
+#include "../includes/ft_processor.h"
 
 int     ft_type_init(s_struct flgs, va_list args)
 {
@@ -28,9 +28,9 @@ int     ft_type_init(s_struct flgs, va_list args)
     else if (flgs.type == 'u')
     	count = ft_u_type(flgs, args);
     else if (flgs.type == 'x')
-    	count = ft_x_type(flgs, args);
+    	count = ft_dwx_type(flgs, args);
     else if (flgs.type == 'X')
-    	count = ft_X_type(flgs, args);
+    	count = ft_upx_type(flgs, args);
     else if (flgs.type == '%')
 	{
     	count = 1;

@@ -10,22 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_processor.h"
+#include "../includes/ft_processor.h"
 
-void 	ft_putnull_p(int len)
+void 	ft_put_null_p(int len)
 {
 	while (len-- > 0)
 		ft_putchar_fd('0', 1);
 }
 
-int		ft_dot_star_p(unsigned int num, s_struct flgs, int count)
+int		ft_dot_star_p(unsigned long num, s_struct flgs, int count)
 {
-	flgs.dot_star -= count;
+	flgs.dot_star -= (count - 2);
 	flgs.width -= flgs.dot_star;
+	flgs.lenght = (flgs.width > 0 ? flgs.lenght : flgs.lenght + 2);
 	if (flgs.minus == 1)
 	{
 		write(1, "0x", 2);
-		ft_putnull_p(flgs.dot_star);
+		ft_put_null_p(flgs.dot_star);
 		if (num == 0)
 			return (flgs.lenght);
 		ft_putnbr16_fd(num, 1, "0123456789abcdef");
@@ -38,12 +39,12 @@ int		ft_dot_star_p(unsigned int num, s_struct flgs, int count)
 	if (flgs.minus == 0)
 	{
 		write(1, "0x", 2);
-		ft_putnull_p(flgs.dot_star);
+		ft_put_null_p(flgs.dot_star);
 		if (num == 0)
 			return (flgs.lenght);
 		ft_putnbr16_fd(num, 1, "0123456789abcdef");
 	}
-	return (count > flgs.lenght ? count : flgs.lenght - count);
+	return (count >= flgs.lenght ? count : flgs.lenght);
 }
 
 int		ft_p_type(s_struct flgs, va_list args)
@@ -55,7 +56,7 @@ int		ft_p_type(s_struct flgs, va_list args)
 	count = 2;
 	num = va_arg(args, unsigned long);
 	buff = num;
-	while (buff > 1)
+	while (buff > 0)
 	{
 		buff /= 16;
 		count++;
@@ -63,8 +64,8 @@ int		ft_p_type(s_struct flgs, va_list args)
 	flgs.width -= count;
 	if (flgs.dot_star >= 0)
 	{
-		count += ft_dot_star_p(num, flgs, count);
-		return (count);
+		count = ft_dot_star_p(num, flgs, count);
+		return (count >= flgs.lenght ? count : flgs.lenght);
 	}
 	if (flgs.minus == 1)
 	{
@@ -75,7 +76,7 @@ int		ft_p_type(s_struct flgs, va_list args)
 	}
 	else if (flgs.zero == 1)
 	{
-		ft_putnull_p(flgs.width);
+		ft_put_null_p(flgs.width);
 		write(1, "0x", 2);
 		ft_putnbr16_fd(num, 1, "0123456789abcdef");
 	}
@@ -86,40 +87,5 @@ int		ft_p_type(s_struct flgs, va_list args)
 		write(1, "0x", 2);
 		ft_putnbr16_fd(num, 1, "0123456789abcdef");
 	}
-	return (count > flgs.lenght ? count : flgs.lenght);
-}
-
-int		ft_po_type(s_struct flgs, va_list args)
-{
-	int				count;
-	unsigned long	buff;
-	unsigned long	pointer;
-
-	count = 0;
-	pointer = va_arg(args, unsigned long);
-	buff = pointer;
-	if (flgs.minus == 1)
-	{
-		write(1, "0x", 2);
-		ft_putnbr16_fd(pointer, 1, "0123456789abcdef");
-		(flgs.width)--;
-	}
-	while (buff > 0)
-	{
-		buff /= 16;
-		count++;
-	}
-	flgs.width -= (count + 2);
-	count = (flgs.width > 0 ? ((count + flgs.width) + 2) : (count + 2));
-	while (flgs.width > 0)
-	{
-		ft_putchar_fd(' ', 1);
-		(flgs.width)--;
-	}
-	if (flgs.minus == 0)
-	{
-		write(1, "0x", 2);
-		ft_putnbr16_fd(pointer, 1, "0123456789abcdef");
-	}
-	return (count);
+	return (count >= flgs.lenght ? count : flgs.lenght);
 }

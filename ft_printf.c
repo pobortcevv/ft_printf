@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "includes/printf.h"
 
 int	ft_printf(const char *input, ...)
 {
@@ -21,17 +21,4 @@ int	ft_printf(const char *input, ...)
 	count = ft_write_common(input, args, 0);
 	va_end(args);
 	return (count);
-}
-
-int main (void)
-{
-    int k;
-    int or;
-
-	k = ft_printf("%40.20p", "creed");
-	or = printf("\n%40.20p", "creed");
-//	printf("/");
-	printf("\nmy = %d", k);
-    printf("\nor = %d", or - 1);
-	return (0);
 }

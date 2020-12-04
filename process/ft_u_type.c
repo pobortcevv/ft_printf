@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_x_type.c                                        :+:      :+:    :+:   */
+/*   ft_u_type.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabra <sabra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 22:22:13 by sabra             #+#    #+#             */
-/*   Updated: 2020/11/30 22:22:15 by sabra            ###   ########.fr       */
+/*   Created: 2020/11/30 20:41:15 by sabra             #+#    #+#             */
+/*   Updated: 2020/11/30 20:41:17 by sabra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_processor.h"
+#include "../includes//ft_processor.h"
 
-void 	ft_putnull_x(int len)
+void 	ft_put_null_u(int len)
 {
 	while (len--)
 		ft_putchar_fd('0', 1);
 }
 
-int		ft_dot_star_x(unsigned int num, s_struct flgs, int count)
+int		ft_dot_star_u(unsigned int num, s_struct flgs, int count)
 {
 	flgs.dot_star -= count;
-	count += (flgs.width + flgs.dot_star);
 	flgs.width -= flgs.dot_star;
 	if (flgs.minus == 1)
 	{
-		ft_putnull_x(flgs.dot_star);
-		ft_putnbr16_fd(num, 1, "0123456789abcdef");
+		ft_put_null_u(flgs.dot_star);
+		if (num == 0 && flgs.dot_star == 0)
+			return (count > flgs.lenght ? count : flgs.lenght);
+		ft_putnbr16_fd(num, 1, "0123456789");
 	}
 	while (flgs.width > 0)
 	{
@@ -35,13 +36,15 @@ int		ft_dot_star_x(unsigned int num, s_struct flgs, int count)
 	}
 	if (flgs.minus == 0)
 	{
-		ft_putnull_x(flgs.dot_star);
-		ft_putnbr16_fd(num, 1, "0123456789abcdef");
+		ft_put_null_u(flgs.dot_star);
+		if (num == 0 && flgs.dot_star == 0)
+			return (count > flgs.lenght ? count : flgs.lenght);
+		ft_putnbr16_fd(num, 1, "0123456789");
 	}
-	return (count);
+	return (count > flgs.lenght ? count : flgs.lenght);
 }
 
-int		ft_x_type(s_struct flgs, va_list args)
+int		ft_u_type(s_struct flgs, va_list args)
 {
 	int count;
 	unsigned int num;
@@ -50,33 +53,33 @@ int		ft_x_type(s_struct flgs, va_list args)
 	count = 0;
 	num = va_arg(args, unsigned int);
 	buff = num;
-	while (buff > 1)
+	while (buff > 0)
 	{
-		buff /= 16;
+		buff /= 10;
 		count++;
 	}
 	flgs.width -= count;
-	if (flgs.dot_star != 0)
+	if (flgs.dot_star >= 0)
 	{
-		count += ft_dot_star_x(num, flgs, count);
-		return (count);
+		count = ft_dot_star_u(num, flgs, count);
+		return (count > flgs.lenght ? count : flgs.lenght);
 	}
 	if (flgs.minus == 1)
 	{
-		ft_putnbr16_fd(num, 1, "0123456789abcdef");
+		ft_putnbr16_fd(num, 1, "0123456789");
 		while ((flgs.width)--)
 			ft_putchar_fd(' ', 1);
 	}
 	else if (flgs.zero == 1)
 	{
-		ft_putnull_x(flgs.width);
-		ft_putnbr16_fd(num, 1, "0123456789abcdef");
+		ft_put_null_u(flgs.width);
+		ft_putnbr16_fd(num, 1, "0123456789");
 	}
 	else
 	{
-		while ((flgs.width)--)
+		while ((flgs.width)-- > 0)
 			ft_putchar_fd(' ', 1);
-		ft_putnbr16_fd(num, 1, "0123456789abcdef");
+		ft_putnbr16_fd(num, 1, "0123456789");
 	}
-	return (count);
+	return (count > flgs.lenght ? count : flgs.lenght);
 }

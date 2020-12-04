@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include "ft_parser.h"
-#include "ft_processor.h"
+#include "../includes/printf.h"
+#include "../includes/ft_parser.h"
+#include "../includes/ft_processor.h"
 
 s_struct	struct_init(void)
 {

@@ -21,7 +21,7 @@ int		ft_s_type(s_struct flgs, va_list args);
 int		ft_p_type(s_struct flgs, va_list args);
 int		ft_di_type(s_struct flgs, va_list args);
 int		ft_u_type(s_struct flgs, va_list args);
-int		ft_x_type(s_struct flgs, va_list args);
-int		ft_X_type(s_struct flgs, va_list args);
+int		ft_dwx_type(s_struct flgs, va_list args);
+int		ft_upx_type(s_struct flgs, va_list args);
 
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_processor.h"
+#include "../includes/ft_processor.h"
 
 int 	ft_putnull(int num, int len)
 {
@@ -71,7 +71,7 @@ int		ft_di_type(s_struct flgs, va_list args)
 	if (buff < 0)
 	{
 		buff *= -1;
-		//flgs.lenght++;
+		flgs.lenght++;
 		count++;
 	}
 	while (buff > 0)

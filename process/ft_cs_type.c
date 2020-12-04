@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_processor.h"
+#include "../includes/ft_processor.h"
 
 int		ft_s_type(s_struct flgs, va_list args)
 {

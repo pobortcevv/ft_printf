@@ -14,10 +14,8 @@
 # define PRINTF_H
 
 # include <stdarg.h>
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
-//# include "ft_processor.h"
-//# include "ft_parser.h"
 
 typedef struct	t_struct
 {
@@ -29,7 +27,6 @@ typedef struct	t_struct
 	char	type;
 }				s_struct;
 
-int		ft_printf(const char *input, ...);
 int		ft_write_common(const char *str, va_list args, int i);
 
 #endif
