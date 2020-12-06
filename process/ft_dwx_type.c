@@ -26,16 +26,15 @@ int		ft_dot_star_dwx(unsigned int num, s_struct flgs, int count)
 	if (flgs.minus == 1)
 	{
 		ft_put_null_dwx(flgs.dot_star);
-		if (num == 0)
-			return (count > flgs.lenght ? count : flgs.lenght);
-		ft_putnbr16_fd(num, 1, "0123456789abcdef");
+		if (num != 0 || flgs.dot_star > 0)
+			ft_putnbr16_fd(num, 1, "0123456789abcdef");
 	}
 	while ((flgs.width)-- > 0)
 		ft_putchar_fd(' ', 1);
 	if (flgs.minus == 0)
 	{
 		ft_put_null_dwx(flgs.dot_star);
-		if (num == 0)
+		if (num == 0 && flgs.dot_star <= 0)
 			return (count > flgs.lenght ? count : flgs.lenght);
 		ft_putnbr16_fd(num, 1, "0123456789abcdef");
 	}
@@ -56,6 +55,8 @@ int		ft_dwx_type(s_struct flgs, va_list args)
 		buff /= 16;
 		count++;
 	}
+	if (num == 0 && flgs.dot_star != 0)
+		count = 1;
 	flgs.width -= count;
 	if (flgs.dot_star >= 0)
 	{

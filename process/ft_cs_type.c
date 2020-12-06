@@ -70,18 +70,11 @@ int		ft_c_type(s_struct flgs, va_list args)
 {
 	int count;
 
-	count = 1;
+	count = (flgs.width >= 1 ? flgs.width : 1);
 	if (flgs.minus == 1)
-	{
 		ft_putchar_fd(va_arg(args, int), 1);
-		(flgs.width)--;
-	}
-	count = (flgs.width > count ? flgs.width : count);
-	while (flgs.width > 1)
-	{
+	while ((flgs.width)-- > 1)
 		ft_putchar_fd(' ', 1);
-		(flgs.width)--;
-	}
 	if (flgs.minus == 0)
 		ft_putchar_fd(va_arg(args, int), 1);
 	return (count);

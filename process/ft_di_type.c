@@ -37,22 +37,24 @@ int		ft_dot_star_di(int num, s_struct flgs, int count)
 		flgs.width -= flgs.dot_star + count;
 	else
 		flgs.width -= count;
+	if (num < 0 && flgs.lenght > count && flgs.width < flgs.dot_star)
+		flgs.lenght++;
 	if (flgs.minus == 1)
 	{
 		num = ft_putnull(num, flgs.dot_star);
-		if (num == 0 && flgs.dot_star == 0)
-			return (flgs.lenght);
-		ft_putnbr_fd(num, 1);
+		if (num != 0 || flgs.dot_star > 0)
+			ft_putnbr_fd(num, 1);
 	}
 	while (flgs.width > 0)
 	{
 		ft_putchar_fd(' ', 1);
 		flgs.width--;
 	}
+
 	if (flgs.minus == 0)
 	{
 		num = ft_putnull(num, flgs.dot_star);
-		if (num == 0 && flgs.dot_star == 0)
+		if (num == 0 && flgs.dot_star <= 0)
 			return (flgs.lenght);
 		ft_putnbr_fd(num, 1);
 	}
@@ -67,7 +69,7 @@ int		ft_di_type(s_struct flgs, va_list args)
 
 	count = 0;
 	num = va_arg(args, int);
-	if (num == 0)
+	if (num == 0 && flgs.dot_star != 0)
 		count = 1;
 	buff = num;
 	if (buff < 0)
@@ -88,7 +90,6 @@ int		ft_di_type(s_struct flgs, va_list args)
 	flgs.width -= count;
 	if (flgs.minus == 1)
 	{
-
 		ft_putnbr_fd(num, 1);
 		while ((flgs.width)-- > 0)
 			ft_putchar_fd(' ', 1);
