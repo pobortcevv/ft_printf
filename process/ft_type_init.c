@@ -17,7 +17,7 @@ int     ft_type_init(s_struct flgs, va_list args)
     int count;
 
     count = 0;
-    if (flgs.type == 'c')
+    if (flgs.type == 'c' || flgs.type == '%')
         count = ft_c_type(flgs, args);
     else if (flgs.type == 's')
     	count = ft_s_type(flgs, args);
@@ -31,10 +31,5 @@ int     ft_type_init(s_struct flgs, va_list args)
     	count = ft_dwx_type(flgs, args);
     else if (flgs.type == 'X')
     	count = ft_upx_type(flgs, args);
-    else if (flgs.type == '%')
-	{
-    	count = 1;
-    	ft_putchar_fd('%', 1);
-	}
     return (count);
 }

@@ -12,14 +12,14 @@
 
 #include "../includes/ft_processor.h"
 
-int 	ft_putnull(int num, int len)
+int 	ft_put_null_di(long long num, int len)
 {
 	if (num < 0)
 	{
 		num *= -1;
 		ft_putchar_fd('-', 1);
 	}
-	if (len > 1)
+	if (len > 0)
 	{
 		while (len--)
 			ft_putchar_fd('0', 1);
@@ -27,7 +27,7 @@ int 	ft_putnull(int num, int len)
 	return (num);
 }
 
-int		ft_dot_star_di(int num, s_struct flgs, int count)
+int		ft_dot_star_di(long long num, s_struct flgs, int count)
 {
 	if (num < 0)
 		flgs.dot_star -= (count - 1);
@@ -41,7 +41,7 @@ int		ft_dot_star_di(int num, s_struct flgs, int count)
 		flgs.lenght++;
 	if (flgs.minus == 1)
 	{
-		num = ft_putnull(num, flgs.dot_star);
+		num = ft_put_null_di(num, flgs.dot_star);
 		if (num != 0 || flgs.dot_star > 0)
 			ft_putnbr_fd(num, 1);
 	}
@@ -53,7 +53,7 @@ int		ft_dot_star_di(int num, s_struct flgs, int count)
 
 	if (flgs.minus == 0)
 	{
-		num = ft_putnull(num, flgs.dot_star);
+		num = ft_put_null_di(num, flgs.dot_star);
 		if (num == 0 && flgs.dot_star <= 0)
 			return (flgs.lenght);
 		ft_putnbr_fd(num, 1);
@@ -64,12 +64,12 @@ int		ft_dot_star_di(int num, s_struct flgs, int count)
 int		ft_di_type(s_struct flgs, va_list args)
 {
 	int count;
-	int num;
-	int buff;
+	long long num;
+	long long buff;
 
 	count = 0;
 	num = va_arg(args, int);
-	if (num == 0 && flgs.dot_star != 0)
+	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star != -2)
 		count = 1;
 	buff = num;
 	if (buff < 0)
@@ -82,7 +82,7 @@ int		ft_di_type(s_struct flgs, va_list args)
 		buff /= 10;
 		count++;
 	}
-	if (flgs.dot_star >= 0)
+	if (flgs.dot_star != -1)
 	{
 		count = ft_dot_star_di(num, flgs, count);
 		return (count > flgs.lenght ? count : flgs.lenght);
@@ -96,7 +96,7 @@ int		ft_di_type(s_struct flgs, va_list args)
 	}
 	else if (flgs.zero == 1)
 	{
-		num = ft_putnull(num, flgs.width);
+		num = ft_put_null_di(num, flgs.width);
 		ft_putnbr_fd(num, 1);
 	}
 	else

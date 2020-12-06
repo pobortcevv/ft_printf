@@ -18,49 +18,53 @@ int		ft_s_type(s_struct flgs, va_list args)
 	int		count;
 
 	str = va_arg(args, char *);
-	if (flgs.dot_star >= 0)
-	{
+	if (!str)
+		str = "(null)";
+	if (flgs.dot_star > 0 && flgs.dot_star < (int)ft_strlen(str))
 		count = flgs.dot_star;
-	}
 	else
-	{
 		count = ft_strlen(str);
+	if (flgs.dot_star == -2 || flgs.dot_star == 0)
+	{
+		count = flgs.width;
+		while ((flgs.width)-- > 0)
+			ft_putchar_fd(' ', 1);
+		return (count);
 	}
-	flgs.width -= (count);
+	flgs.width -= count;
 	if (flgs.minus == 1)
 	{
-		if (flgs.dot_star >= 0)
+		if (flgs.dot_star > 0)
 		{
-			while ((flgs.dot_star)--)
+			while ((flgs.dot_star)-- > 0 && *str)
 			{
 				ft_putchar_fd(*str, 1);
-				(flgs.width)--;
 				str++;
 			}
 		}
-		else
-		{
+		else if (flgs.dot_star < 0)
 			ft_putstr_fd(str, 1);
-			flgs.width -= ft_strlen(str);
-		}
 	}
 	count = (flgs.width > 0 ? count + flgs.width : count);
-	while (flgs.width > 0)
+	if (flgs.zero == 1)
 	{
-		ft_putchar_fd(' ', 1);
-		(flgs.width)--;
+		while ((flgs.width)-- > 0)
+			ft_putchar_fd('0', 1);
 	}
+	while ((flgs.width)-- > 0)
+		ft_putchar_fd(' ', 1);
 	if (flgs.minus == 0)
 	{
-		if (flgs.dot_star >= 0)
+		if (flgs.dot_star <= (int)ft_strlen(str) && flgs.dot_star > 0)
 		{
 			while ((flgs.dot_star)-- > 0)
 			{
 				ft_putchar_fd(*str, 1);
 				str++;
 			}
+			return (count);
 		}
-		else
+		else if (flgs.dot_star != 0)
 			ft_putstr_fd(str, 1);
 	}
 	return (count);
@@ -72,11 +76,27 @@ int		ft_c_type(s_struct flgs, va_list args)
 
 	count = (flgs.width >= 1 ? flgs.width : 1);
 	if (flgs.minus == 1)
-		ft_putchar_fd(va_arg(args, int), 1);
-	while ((flgs.width)-- > 1)
-		ft_putchar_fd(' ', 1);
+	{
+		if (flgs.type == 'c')
+			ft_putchar_fd(va_arg(args, int), 1);
+		else
+			ft_putchar_fd('%', 1);
+	}
+	if (flgs.type == '%' && flgs.zero == 1)
+		while ((flgs.width)-- > 1)
+			ft_putchar_fd('0', 1);
+	else
+	{
+		while ((flgs.width)-- > 1)
+			ft_putchar_fd(' ', 1);
+	}
 	if (flgs.minus == 0)
-		ft_putchar_fd(va_arg(args, int), 1);
+	{
+		if (flgs.type == 'c')
+			ft_putchar_fd(va_arg(args, int), 1);
+		else
+			ft_putchar_fd('%', 1);
+	}
 	return (count);
 }
 

@@ -21,13 +21,14 @@ void 	ft_put_null_p(int len)
 int		ft_dot_star_p(unsigned long num, s_struct flgs, int count)
 {
 	flgs.dot_star -= (count - 2);
-	flgs.width -= flgs.dot_star;
-	flgs.lenght = (flgs.width > 0 ? flgs.lenght : flgs.lenght + 2);
+	if (flgs.dot_star >= 0)
+		flgs.width -= flgs.dot_star;
+	flgs.lenght = (flgs.width >= 0 ? flgs.lenght : flgs.lenght + 2);
 	if (flgs.minus == 1)
 	{
 		write(1, "0x", 2);
 		ft_put_null_p(flgs.dot_star);
-		if (num == 0)
+		if (num == 0 && flgs.dot_star <= 0)
 			return (flgs.lenght);
 		ft_putnbr16_fd(num, 1, "0123456789abcdef");
 	}
@@ -40,7 +41,7 @@ int		ft_dot_star_p(unsigned long num, s_struct flgs, int count)
 	{
 		write(1, "0x", 2);
 		ft_put_null_p(flgs.dot_star);
-		if (num == 0)
+		if (num == 0 && flgs.dot_star <= 0)
 			return (flgs.lenght);
 		ft_putnbr16_fd(num, 1, "0123456789abcdef");
 	}
@@ -61,11 +62,16 @@ int		ft_p_type(s_struct flgs, va_list args)
 		buff /= 16;
 		count++;
 	}
+	if ((void *)num == NULL && flgs.dot_star != -2)
+	{
+		num = 0;
+		count++;
+	}
 	flgs.width -= count;
-	if (flgs.dot_star >= 0)
+	if (flgs.dot_star != -1)
 	{
 		count = ft_dot_star_p(num, flgs, count);
-		return (count >= flgs.lenght ? count : flgs.lenght);
+		return (count);
 	}
 	if (flgs.minus == 1)
 	{

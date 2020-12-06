@@ -30,26 +30,30 @@ s_struct	ft_width_init(const char *str, s_struct flgs, int i, va_list args)
 	{
 		flgs.width = va_arg(args, int);
 		if (flgs.width < 0)
+		{
 			flgs.width *= -1;
-
+			flgs = ft_minus_init(flgs);
+		}
 	}
 	return (flgs);
 }
 
 s_struct	ft_dot_star_init(const char *str, s_struct flgs, int i, va_list args)
 {
-	int dot;
-
 	if (ft_isdigit(str[++i]))
 	{
 		flgs.dot_star = ft_atoi(&str[i]);
 	}
-	else
+	else if (str[i] == '*')
 	{
-		dot = va_arg(args, int);
-		if (dot < 0)
+		flgs.dot_star = va_arg(args, int);
+		if (flgs.dot_star < 0)
+		{
+			//flgs.dot_star *= -1;
 			flgs.minus = 1;
-		flgs.dot_star = dot;
+		}
 	}
+	else
+		flgs.dot_star = -2;
 	return (flgs);
 }

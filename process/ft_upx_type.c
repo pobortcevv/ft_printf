@@ -55,10 +55,10 @@ int		ft_upx_type(s_struct flgs, va_list args)
 		buff /= 16;
 		count++;
 	}
-	if (num == 0 && flgs.dot_star != 0)
+	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star != -2)
 		count = 1;
 	flgs.width -= count;
-	if (flgs.dot_star >= 0)
+	if (flgs.dot_star != -1)
 	{
 		count = ft_dot_star_upx(num, flgs, count);
 		return (count);

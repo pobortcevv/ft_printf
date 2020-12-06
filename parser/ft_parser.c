@@ -34,9 +34,11 @@ int		ft_parser(const char *str, int i, va_list args, int *count)
 	
 	flgs = struct_init();
 	//printf("kek");
-	while (flgs.type == '\0')
+	while (flgs.type == '\0' && str[i] != '\0')
 	{
-		if (str[i] == '0' && flgs.minus == 0 && str[i - 1] == '%')
+		if (str[i] == '%')
+			flgs.type = '%';
+		else if (str[i] == '0' && flgs.minus == 0 && str[i - 1] == '%')
 			flgs.zero = 1;
 		else if (str[i] == '-')
 			flgs = ft_minus_init(flgs);

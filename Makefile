@@ -14,6 +14,7 @@ OBJS		= $(SRCS:.c=.o)
 CC			= gcc
 RM			= rm -f
 CFLAGS		= -Wall -Wextra -Werror
+LIBFILES	= libft/*.c
 
 INCLUDES = -I./includes
 
@@ -22,7 +23,9 @@ NAME		= libftprintf.a
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
+			#$(CC) $(CFLAGS) $(SRCS) $(LIBFILES)
 			make bonus -C ./libft
+
 			cp libft/libft.a $(NAME)
 			ar rcs $(NAME) $(OBJS)
 clean:
