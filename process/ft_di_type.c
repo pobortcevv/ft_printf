@@ -40,7 +40,7 @@ int		ft_dot_star_di(int num, s_struct flgs, int count)
 	if (flgs.minus == 1)
 	{
 		num = ft_putnull(num, flgs.dot_star);
-		if (num == 0)
+		if (num == 0 && flgs.dot_star == 0)
 			return (flgs.lenght);
 		ft_putnbr_fd(num, 1);
 	}
@@ -52,7 +52,7 @@ int		ft_dot_star_di(int num, s_struct flgs, int count)
 	if (flgs.minus == 0)
 	{
 		num = ft_putnull(num, flgs.dot_star);
-		if (num == 0)
+		if (num == 0 && flgs.dot_star == 0)
 			return (flgs.lenght);
 		ft_putnbr_fd(num, 1);
 	}
@@ -67,11 +67,12 @@ int		ft_di_type(s_struct flgs, va_list args)
 
 	count = 0;
 	num = va_arg(args, int);
+	if (num == 0)
+		count = 1;
 	buff = num;
 	if (buff < 0)
 	{
 		buff *= -1;
-		flgs.lenght++;
 		count++;
 	}
 	while (buff > 0)
@@ -81,7 +82,7 @@ int		ft_di_type(s_struct flgs, va_list args)
 	}
 	if (flgs.dot_star >= 0)
 	{
-		ft_dot_star_di(num, flgs, count);
+		count = ft_dot_star_di(num, flgs, count);
 		return (count > flgs.lenght ? count : flgs.lenght);
 	}
 	flgs.width -= count;

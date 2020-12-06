@@ -29,11 +29,6 @@ void	ft_putnbr16_fd(unsigned long num, int fd, char *base)
 
 	base_n = ft_strlen(base);
 	n = num;
-	if (n < 0)
-	{
-		n = -n;
-		ft_putchar_fd('-', fd);
-	}
 	if (n < base_n)
 		ft_putchar_fd(ft_change_base(n, base), fd);
 	else

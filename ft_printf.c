@@ -22,3 +22,13 @@ int	ft_printf(const char *input, ...)
 	va_end(args);
 	return (count);
 }
+//
+//int		main(void)
+//{
+//	int my;
+//	int or;
+//
+//	my = ft_printf("this %d number", 0);
+//	or = ft_printf("this %d number", 0);
+//	printf("\nmy = %d\nor = %d", my, or);
+//}
