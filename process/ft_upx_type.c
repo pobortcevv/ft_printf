@@ -18,7 +18,7 @@ void 	ft_put_null_upx(int len)
 		ft_putchar_fd('0', 1);
 }
 
-int		ft_dot_star_upx(unsigned int num, s_struct flgs, int count)
+int		ft_dot_star_upx(unsigned int num, t_struct flgs, int count)
 {
 	flgs.dot_star -= count;
 	if (flgs.dot_star >= 0)
@@ -41,7 +41,7 @@ int		ft_dot_star_upx(unsigned int num, s_struct flgs, int count)
 	return (count > flgs.lenght ? count : flgs.lenght);
 }
 
-int		ft_upx_type(s_struct flgs, va_list args)
+int		ft_upx_type(t_struct flgs, va_list args)
 {
 	int count;
 	unsigned int num;

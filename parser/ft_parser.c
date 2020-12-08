@@ -14,9 +14,9 @@
 #include "../includes/ft_parser.h"
 #include "../includes/ft_processor.h"
 
-s_struct	struct_init(void)
+t_struct	struct_init(void)
 {
-	s_struct flgs;
+	t_struct flgs;
 
 	flgs.minus = 0;
 	flgs.zero = 0;
@@ -27,13 +27,11 @@ s_struct	struct_init(void)
 	return (flgs);
 }
 
-int		ft_parser(const char *str, int i, va_list args, int *count)
+int			ft_parser(const char *str, int i, va_list args, int *count)
 {
-	s_struct flgs;
+	t_struct flgs;
 
-	
 	flgs = struct_init();
-	//printf("kek");
 	while (flgs.type == '\0' && str[i] != '\0')
 	{
 		if (str[i] == '%')
@@ -42,38 +40,29 @@ int		ft_parser(const char *str, int i, va_list args, int *count)
 			flgs.zero = 1;
 		else if (str[i] == '-')
 			flgs = ft_minus_init(flgs);
-        else if (str[i] == '.')
-            flgs = ft_dot_star_init(str, flgs, i, args);
-		else if (((str[i] >= 1 && str[i] <= '9') || str[i] == '*') && flgs
-		.dot_star <= 0 && flgs.width <= 0)
+		else if (str[i] == '.')
+			flgs = ft_dot_star_init(str, flgs, i, args);
+		else if (((str[i] >= 1 && str[i] <= '9') || str[i] == '*') &&
+		flgs.dot_star == -1 && flgs.width <= 0)
 			flgs = ft_width_init(str, flgs, i, args);
 		else if (ft_isalpha(str[i]))
 			flgs.type = str[i];
 		i++;
-    }
-	if (flgs.width >= flgs.dot_star)
-		flgs.lenght = flgs.width;
-	else
-		flgs.lenght = flgs.dot_star;
-    // Здесь будет функция обработки флагов
-    *count += ft_type_init(flgs, args);
-    // А здесь уже будет функция ft_write_common
-//	printf("\nminus = %d\nzero = %d\nwidth = %d\ndot_star = %d\nlen = %d\ntype = %c",
-//		flgs.minus, flgs.zero, flgs.width, flgs.dot_star, flgs.lenght, flgs.type);
+	}
+	flgs.lenght = flgs.width >= flgs.dot_star ? flgs.width : flgs.dot_star;
+	*count += ft_type_init(flgs, args);
 	return (i);
 }
 
 int			ft_write_common(const char *str, va_list args, int i)
 {
-	int 	count;
+	int		count;
 
 	count = 0;
 	while (str[i] != '\0')
-    {
+	{
 		if (str[i] == '%')
-        {
-			i = ft_parser(str, (i+1), args, &count) - 1;
-		}
+			i = ft_parser(str, i + 1, args, &count) - 1;
 		else
 		{
 			ft_putchar_fd(str[i], 1);
@@ -83,4 +72,3 @@ int			ft_write_common(const char *str, va_list args, int i)
 	}
 	return (count);
 }
-

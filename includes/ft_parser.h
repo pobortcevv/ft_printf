@@ -16,8 +16,9 @@
 # include "printf.h"
 # include "ft_processor.h"
 
-s_struct	ft_minus_init(s_struct flgs);
-s_struct	ft_width_init(const char *str, s_struct flgs, int i, va_list args);
-s_struct	ft_dot_star_init(const char *str, s_struct flgs, int i, va_list args);
+t_struct	ft_minus_init(t_struct flgs);
+t_struct	ft_width_init(const char *str, t_struct flgs, int i, va_list args);
+t_struct	ft_dot_star_init(const char *str, t_struct flgs, int i, va_list
+args);
 
 #endif

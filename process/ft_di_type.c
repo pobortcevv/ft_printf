@@ -27,7 +27,7 @@ int 	ft_put_null_di(long long num, int len)
 	return (num);
 }
 
-int		ft_dot_star_di(long long num, s_struct flgs, int count)
+int		ft_dot_star_di(long long num, t_struct flgs, int count)
 {
 	if (num < 0)
 		flgs.dot_star -= (count - 1);
@@ -61,7 +61,7 @@ int		ft_dot_star_di(long long num, s_struct flgs, int count)
 	return (count > flgs.lenght ? count : flgs.lenght);
 }
 
-int		ft_di_type(s_struct flgs, va_list args)
+int		ft_di_type(t_struct flgs, va_list args)
 {
 	int count;
 	long long num;
@@ -69,7 +69,7 @@ int		ft_di_type(s_struct flgs, va_list args)
 
 	count = 0;
 	num = va_arg(args, int);
-	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star != -2)
+	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star > -2)
 		count = 1;
 	buff = num;
 	if (buff < 0)

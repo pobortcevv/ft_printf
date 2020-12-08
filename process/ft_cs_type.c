@@ -12,7 +12,7 @@
 
 #include "../includes/ft_processor.h"
 
-int		ft_s_type(s_struct flgs, va_list args)
+int		ft_s_type(t_struct flgs, va_list args)
 {
 	char	*str;
 	int		count;
@@ -70,7 +70,7 @@ int		ft_s_type(s_struct flgs, va_list args)
 	return (count);
 }
 
-int		ft_c_type(s_struct flgs, va_list args)
+int		ft_c_type(t_struct flgs, va_list args)
 {
 	int count;
 

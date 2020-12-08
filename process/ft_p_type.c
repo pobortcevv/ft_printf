@@ -18,7 +18,7 @@ void 	ft_put_null_p(int len)
 		ft_putchar_fd('0', 1);
 }
 
-int		ft_dot_star_p(unsigned long num, s_struct flgs, int count)
+int		ft_dot_star_p(unsigned long num, t_struct flgs, int count)
 {
 	flgs.dot_star -= (count - 2);
 	if (flgs.dot_star >= 0)
@@ -48,7 +48,7 @@ int		ft_dot_star_p(unsigned long num, s_struct flgs, int count)
 	return (count >= flgs.lenght ? count : flgs.lenght);
 }
 
-int		ft_p_type(s_struct flgs, va_list args)
+int		ft_p_type(t_struct flgs, va_list args)
 {
 	int				count;
 	unsigned long	buff;

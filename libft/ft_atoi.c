@@ -23,7 +23,7 @@ int				ft_atoi(const char *str)
 {
 	int			i;
 	int			sign;
-	long int	result;
+	long long	result;
 
 	i = 0;
 	sign = 1;

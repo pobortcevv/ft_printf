@@ -12,7 +12,7 @@
 
 #include "../includes/ft_processor.h"
 
-int     ft_type_init(s_struct flgs, va_list args)
+int     ft_type_init(t_struct flgs, va_list args)
 {
     int count;
 
@@ -23,8 +23,8 @@ int     ft_type_init(s_struct flgs, va_list args)
     	count = ft_s_type(flgs, args);
     else if (flgs.type == 'p')
     	count = ft_p_type(flgs, args);
-    else if (flgs.type == 'd' || flgs.type == 'i')
-    	count = ft_di_type(flgs, args);
+//    else if (flgs.type == 'd' || flgs.type == 'i')
+//    	count = ft_di_type(flgs, args);
     else if (flgs.type == 'u')
     	count = ft_u_type(flgs, args);
     else if (flgs.type == 'x')

@@ -17,7 +17,7 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 
-typedef struct	t_struct
+typedef struct		s_struct
 {
 	int		minus;
 	int		zero;
@@ -25,8 +25,8 @@ typedef struct	t_struct
 	int		dot_star;
 	int		lenght;
 	char	type;
-}				s_struct;
+}					t_struct;
 
-int		ft_write_common(const char *str, va_list args, int i);
+int					ft_write_common(const char *str, va_list args, int i);
 
 #endif
