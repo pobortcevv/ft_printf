@@ -12,40 +12,22 @@
 
 #include "../includes/ft_processor.h"
 
-int		ft_s_type(t_struct flgs, va_list args)
+void		ft_s_with_minus(t_struct flgs, char *str)
 {
-	char	*str;
-	int		count;
-
-	str = va_arg(args, char *);
-	if (!str)
-		str = "(null)";
-	if (flgs.dot_star > 0 && flgs.dot_star < (int)ft_strlen(str))
-		count = flgs.dot_star;
-	else
-		count = ft_strlen(str);
-	if (flgs.dot_star == -2 || flgs.dot_star == 0)
+	if (flgs.dot_star > 0)
 	{
-		count = flgs.width;
-		while ((flgs.width)-- > 0)
-			ft_putchar_fd(' ', 1);
-		return (count);
-	}
-	flgs.width -= count;
-	if (flgs.minus == 1)
-	{
-		if (flgs.dot_star > 0)
+		while ((flgs.dot_star)-- > 0 && *str)
 		{
-			while ((flgs.dot_star)-- > 0 && *str)
-			{
-				ft_putchar_fd(*str, 1);
-				str++;
-			}
+			ft_putchar_fd(*str, 1);
+			str++;
 		}
-		else if (flgs.dot_star < 0)
-			ft_putstr_fd(str, 1);
 	}
-	count = (flgs.width > 0 ? count + flgs.width : count);
+	else if (flgs.dot_star < 0)
+		ft_putstr_fd(str, 1);
+}
+
+int			ft_s_null_minus(t_struct flgs, int count, char *str)
+{
 	if (flgs.zero == 1)
 	{
 		while ((flgs.width)-- > 0)
@@ -70,10 +52,37 @@ int		ft_s_type(t_struct flgs, va_list args)
 	return (count);
 }
 
-int		ft_c_type(t_struct flgs, va_list args)
+int			ft_s_type(t_struct flgs, va_list args)
 {
-	int count;
+	char	*str;
+	int		count;
 
+	str = va_arg(args, char *);
+	if (!str)
+		str = "(null)";
+	if (flgs.dot_star > 0 && flgs.dot_star < (int)ft_strlen(str))
+		count = flgs.dot_star;
+	else
+		count = ft_strlen(str);
+	if (flgs.dot_star == -2 || flgs.dot_star == 0)
+	{
+		count = flgs.width;
+		while ((flgs.width)-- > 0)
+			ft_putchar_fd(' ', 1);
+		return (count);
+	}
+	flgs.width -= count;
+	if (flgs.minus == 1)
+	{
+		ft_s_with_minus(flgs, str);
+	}
+	count = (flgs.width > 0 ? count + flgs.width : count);
+	count = ft_s_null_minus(flgs, count, str);
+	return (count);
+}
+
+int			ft_c_type(t_struct flgs, va_list args, int count)
+{
 	count = (flgs.width >= 1 ? flgs.width : 1);
 	if (flgs.minus == 1)
 	{
@@ -99,4 +108,3 @@ int		ft_c_type(t_struct flgs, va_list args)
 	}
 	return (count);
 }
-

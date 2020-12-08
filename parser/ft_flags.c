@@ -35,8 +35,8 @@ t_struct	ft_width_init(const char *str, t_struct flgs, int i, va_list args)
 	return (flgs);
 }
 
-t_struct	ft_dot_star_init(const char *str, t_struct flgs, int i, va_list
-args)
+t_struct	ft_dot_star_init(const char *str, t_struct flgs, int i,
+								va_list args)
 {
 	if (ft_isdigit(str[++i]))
 		flgs.dot_star = ft_atoi(&str[i]);

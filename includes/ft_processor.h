@@ -16,10 +16,10 @@
 # include "printf.h"
 
 int		ft_type_init(t_struct flgs, va_list args);
-int		ft_c_type(t_struct flgs, va_list args);
+int		ft_c_type(t_struct flgs, va_list args, int count);
 int		ft_s_type(t_struct flgs, va_list args);
 int		ft_p_type(t_struct flgs, va_list args);
-int		ft_di_type(t_struct flgs, va_list args);
+int		ft_di_type(t_struct flgs, va_list args, int count);
 int		ft_u_type(t_struct flgs, va_list args);
 int		ft_dwx_type(t_struct flgs, va_list args);
 int		ft_upx_type(t_struct flgs, va_list args);

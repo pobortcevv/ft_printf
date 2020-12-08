@@ -12,22 +12,25 @@
 
 #include "../includes/ft_processor.h"
 
-int 	ft_put_null_di(long long num, int len)
+long long		ft_put_null_di(long long num, int len)
 {
 	if (num < 0)
 	{
 		num *= -1;
 		ft_putchar_fd('-', 1);
 	}
-	if (len > 0)
-	{
-		while (len--)
-			ft_putchar_fd('0', 1);
-	}
+	while (len-- > 0)
+		ft_putchar_fd('0', 1);
 	return (num);
 }
 
-int		ft_dot_star_di(long long num, t_struct flgs, int count)
+void			ft_put_spaces(t_struct flgs)
+{
+	while ((flgs.width)-- > 0)
+		ft_putchar_fd(' ', 1);
+}
+
+int				ft_dot_star_di(long long num, t_struct flgs, int count)
 {
 	if (num < 0)
 		flgs.dot_star -= (count - 1);
@@ -45,12 +48,7 @@ int		ft_dot_star_di(long long num, t_struct flgs, int count)
 		if (num != 0 || flgs.dot_star > 0)
 			ft_putnbr_fd(num, 1);
 	}
-	while (flgs.width > 0)
-	{
-		ft_putchar_fd(' ', 1);
-		flgs.width--;
-	}
-
+	ft_put_spaces(flgs);
 	if (flgs.minus == 0)
 	{
 		num = ft_put_null_di(num, flgs.dot_star);
@@ -61,13 +59,32 @@ int		ft_dot_star_di(long long num, t_struct flgs, int count)
 	return (count > flgs.lenght ? count : flgs.lenght);
 }
 
-int		ft_di_type(t_struct flgs, va_list args)
+void			ft_null_dot_star_di(t_struct flgs, long long num)
 {
-	int count;
-	long long num;
-	long long buff;
+	if (flgs.minus == 1)
+	{
+		ft_putnbr_fd(num, 1);
+		while ((flgs.width)-- > 0)
+			ft_putchar_fd(' ', 1);
+	}
+	else if (flgs.zero == 1)
+	{
+		num = ft_put_null_di(num, flgs.width);
+		ft_putnbr_fd(num, 1);
+	}
+	else
+	{
+		while ((flgs.width)-- > 0)
+			ft_putchar_fd(' ', 1);
+		ft_putnbr_fd(num, 1);
+	}
+}
 
-	count = 0;
+int				ft_di_type(t_struct flgs, va_list args, int count)
+{
+	long long	num;
+	long long	buff;
+
 	num = va_arg(args, int);
 	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star > -2)
 		count = 1;
@@ -88,22 +105,6 @@ int		ft_di_type(t_struct flgs, va_list args)
 		return (count > flgs.lenght ? count : flgs.lenght);
 	}
 	flgs.width -= count;
-	if (flgs.minus == 1)
-	{
-		ft_putnbr_fd(num, 1);
-		while ((flgs.width)-- > 0)
-			ft_putchar_fd(' ', 1);
-	}
-	else if (flgs.zero == 1)
-	{
-		num = ft_put_null_di(num, flgs.width);
-		ft_putnbr_fd(num, 1);
-	}
-	else
-	{
-		while ((flgs.width)-- > 0)
-			ft_putchar_fd(' ', 1);
-		ft_putnbr_fd(num, 1);
-	}
+	ft_null_dot_star_di(flgs, num);
 	return (count > flgs.lenght ? count : flgs.lenght);
 }

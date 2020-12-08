@@ -12,7 +12,7 @@
 
 #include "../includes/ft_processor.h"
 
-void 	ft_put_null_dwx(int len)
+void	ft_put_null_dwx(int len)
 {
 	while (len-- > 0)
 		ft_putchar_fd('0', 1);
@@ -41,28 +41,8 @@ int		ft_dot_star_dwx(unsigned int num, t_struct flgs, int count)
 	return (count > flgs.lenght ? count : flgs.lenght);
 }
 
-int		ft_dwx_type(t_struct flgs, va_list args)
+void	ft_null_dot_star_dwx(t_struct flgs, unsigned int num)
 {
-	int count;
-	unsigned int num;
-	unsigned int buff;
-
-	count = 0;
-	num = va_arg(args, unsigned int);
-	buff = num;
-	while (buff > 0)
-	{
-		buff /= 16;
-		count++;
-	}
-	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star != -2)
-		count = 1;
-	flgs.width -= count;
-	if (flgs.dot_star != -1)
-	{
-		count = ft_dot_star_dwx(num, flgs, count);
-		return (count);
-	}
 	if (flgs.minus == 1)
 	{
 		ft_putnbr16_fd(num, 1, "0123456789abcdef");
@@ -80,5 +60,30 @@ int		ft_dwx_type(t_struct flgs, va_list args)
 			ft_putchar_fd(' ', 1);
 		ft_putnbr16_fd(num, 1, "0123456789abcdef");
 	}
+}
+
+int		ft_dwx_type(t_struct flgs, va_list args)
+{
+	int				count;
+	unsigned int	num;
+	unsigned int	buff;
+
+	count = 0;
+	num = va_arg(args, unsigned int);
+	buff = num;
+	while (buff > 0)
+	{
+		buff /= 16;
+		count++;
+	}
+	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star != -2)
+		count = 1;
+	flgs.width -= count;
+	if (flgs.dot_star != -1)
+	{
+		count = ft_dot_star_dwx(num, flgs, count);
+		return (count);
+	}
+	ft_null_dot_star_dwx(flgs, num);
 	return (count > flgs.lenght ? count : flgs.lenght);
 }

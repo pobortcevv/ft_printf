@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char 	ft_change_base(unsigned long n, char *base)
+char	ft_change_base(unsigned long n, char *base)
 {
 	char	result;
 	int		base_n;

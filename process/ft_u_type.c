@@ -12,7 +12,7 @@
 
 #include "../includes//ft_processor.h"
 
-void 	ft_put_null_u(int len)
+void	ft_put_null_u(int len)
 {
 	while ((len--) > 0)
 		ft_putchar_fd('0', 1);
@@ -44,28 +44,8 @@ int		ft_dot_star_u(unsigned int num, t_struct flgs, int count)
 	return (count > flgs.lenght ? count : flgs.lenght);
 }
 
-int		ft_u_type(t_struct flgs, va_list args)
+void	ft_null_dot_star_u(t_struct flgs, unsigned int num)
 {
-	int count;
-	unsigned int num;
-	unsigned int buff;
-
-	count = 0;
-	num = va_arg(args, unsigned int);
-	buff = num;
-	while (buff > 0)
-	{
-		buff /= 10;
-		count++;
-	}
-	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star != -2)
-		count = 1;
-	flgs.width -= count;
-	if (flgs.dot_star != -1)
-	{
-		count = ft_dot_star_u(num, flgs, count);
-		return (count > flgs.lenght ? count : flgs.lenght);
-	}
 	if (flgs.minus == 1)
 	{
 		ft_putnbr16_fd(num, 1, "0123456789");
@@ -83,5 +63,30 @@ int		ft_u_type(t_struct flgs, va_list args)
 			ft_putchar_fd(' ', 1);
 		ft_putnbr16_fd(num, 1, "0123456789");
 	}
+}
+
+int		ft_u_type(t_struct flgs, va_list args)
+{
+	int				count;
+	unsigned int	num;
+	unsigned int	buff;
+
+	count = 0;
+	num = va_arg(args, unsigned int);
+	buff = num;
+	while (buff > 0)
+	{
+		buff /= 10;
+		count++;
+	}
+	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star != -2)
+		count = 1;
+	flgs.width -= count;
+	if (flgs.dot_star != -1)
+	{
+		count = ft_dot_star_u(num, flgs, count);
+		return (count > flgs.lenght ? count : flgs.lenght);
+	}
+	ft_null_dot_star_u(flgs, num);
 	return (count > flgs.lenght ? count : flgs.lenght);
 }
