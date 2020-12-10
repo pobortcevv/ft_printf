@@ -15,30 +15,13 @@
 int	ft_printf(const char *input, ...)
 {
 	int	count;
-
+	char *str;
 	va_list args;
+
+	str = ft_strdup((char *)input);
 	va_start(args, input);
-	count = ft_write_common(input, args, 0);
+	count = ft_write_common(str, args, 0);
 	va_end(args);
+	free(str);
 	return (count);
 }
-
-//int		main(void)
-//{
-//	int my;
-//	int or;
-//	char	*n = "abcdefghijklmnop";
-//	char	*o = "-a";
-//	char	*p = "-12";
-//	char	*q = "0";
-//	char	*r = "%%";
-//	char	*s = "-2147483648";
-//	char	*t = "0x12345678";
-//	char	*u = "-0";
-//	int		a = -2;
-//
-//	my = ft_printf("%*s, %*s, %*s, %*s, %*s, %*s, %*s, %*s", a, n, a, o, a, p, a, q, a, r, a, s, a, t, a, u);
-//	or = printf("\n%*s, %*s, %*s, %*s, %*s, %*s, %*s, %*s", a, n, a, o, a, p,
-//			 a, q, a, r, a, s, a, t, a, u);
-//	printf("\nmy = %d\nor = %d", my, or - 1);
-//}

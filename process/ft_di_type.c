@@ -99,7 +99,7 @@ int				ft_di_type(t_struct flgs, va_list args, int count)
 		buff /= 10;
 		count++;
 	}
-	if (flgs.dot_star != -1)
+	if (flgs.dot_star > -1 || flgs.dot_star == -2)
 	{
 		count = ft_dot_star_di(num, flgs, count);
 		return (count > flgs.lenght ? count : flgs.lenght);

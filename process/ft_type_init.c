@@ -14,22 +14,22 @@
 
 int		ft_type_init(t_struct flgs, va_list args)
 {
-	int count;
+	int i;
 
-	count = 0;
+	i = 0;
 	if (flgs.type == 'c' || flgs.type == '%')
-		count = ft_c_type(flgs, args, count);
-	else if (flgs.type == 's')
-		count = ft_s_type(flgs, args);
+ 		i = ft_c_type(flgs, args, i);
+	if (flgs.type == 's')
+		i = ft_s_type(flgs, args);
 	else if (flgs.type == 'p')
-		count = ft_p_type(flgs, args);
-//	else if (flgs.type == 'd' || flgs.type == 'i')
-//		count = ft_di_type(flgs, args, count);
+		i = ft_p_type(flgs, args);
+	else if (flgs.type == 'd' || flgs.type == 'i')
+		i = ft_di_type(flgs, args, i);
 	else if (flgs.type == 'u')
-		count = ft_u_type(flgs, args);
+		i = ft_u_type(flgs, args);
 	else if (flgs.type == 'x')
-		count = ft_dwx_type(flgs, args);
+		i = ft_dwx_type(flgs, args);
 	else if (flgs.type == 'X')
-		count = ft_upx_type(flgs, args);
-	return (count);
+		i = ft_upx_type(flgs, args);
+	return (i);
 }

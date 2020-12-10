@@ -61,7 +61,7 @@ int			ft_write_common(const char *str, va_list args, int i)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && str[i+1] != '\0')
 			i = ft_parser(str, i + 1, args, &count) - 1;
 		else
 		{

@@ -2,9 +2,7 @@ SRCDIR	= ./
 OBJDIR	= ./
 SRCS	= ${SRCDIR}ft_memset.c \
 		  ${SRCDIR}ft_bzero.c \
-		  ${SRCDIR}ft_memcpy.c \
 		  ${SRCDIR}ft_memccpy.c \
-		  ${SRCDIR}ft_memmove.c \
 		  ${SRCDIR}ft_strrchr.c \
 		  ${SRCDIR}ft_strnstr.c \
 		  ${SRCDIR}ft_atoi.c \
@@ -37,16 +35,6 @@ SRCS	= ${SRCDIR}ft_memset.c \
 		  ${SRCDIR}ft_strlen.c
 OBJS			= $(SRCS:.c=.o)
 
-BONUS			=	$(SRCDIR)ft_lstnew.c \
-					$(SRCDIR)ft_lstadd_front.c \
-					$(SRCDIR)ft_lstsize.c \
-					$(SRCDIR)ft_lstlast.c \
-					$(SRCDIR)ft_lstadd_back.c \
-					$(SRCDIR)ft_lstdelone.c \
-					$(SRCDIR)ft_lstclear.c \
-					$(SRCDIR)ft_lstiter.c \
-					$(SRCDIR)ft_lstmap.c \
-
 BONUS_OBJS		= 	$(BONUS:.c=.o)
 
 CC				= gcc
@@ -61,12 +49,9 @@ $(NAME):		$(OBJS)
 				ar rcs $(NAME) $(OBJS)
 
 clean:
-				$(RM) $(OBJS) $(BONUS_OBJS)
+				$(RM) $(OBJS)
 
 fclean:			clean
 				$(RM) $(NAME)
 
 re:				fclean $(NAME)
-
-bonus:			$(OBJS) $(BONUS_OBJS)
-				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)

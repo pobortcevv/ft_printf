@@ -24,7 +24,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			#$(CC) $(CFLAGS) $(SRCS) $(LIBFILES)
-			make bonus -C ./libft
+			make -C ./libft
 
 			cp libft/libft.a $(NAME)
 			ar rcs $(NAME) $(OBJS)
