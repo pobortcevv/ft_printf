@@ -14,9 +14,9 @@
 
 int	ft_printf(const char *input, ...)
 {
-	int	count;
-	char *str;
-	va_list args;
+	int		count;
+	char	*str;
+	va_list	args;
 
 	str = ft_strdup((char *)input);
 	va_start(args, input);

@@ -18,7 +18,7 @@ int		ft_type_init(t_struct flgs, va_list args)
 
 	i = 0;
 	if (flgs.type == 'c' || flgs.type == '%')
- 		i = ft_c_type(flgs, args, i);
+		i = ft_c_type(flgs, args, i);
 	if (flgs.type == 's')
 		i = ft_s_type(flgs, args);
 	else if (flgs.type == 'p')

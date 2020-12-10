@@ -12,7 +12,7 @@
 
 #include "../includes/ft_processor.h"
 
-void		ft_s_with_minus(t_struct flgs,const char *str)
+void		ft_s_with_minus(t_struct flgs, const char *str)
 {
 	if (flgs.dot_star > 0)
 	{
@@ -26,7 +26,7 @@ void		ft_s_with_minus(t_struct flgs,const char *str)
 		ft_putstr_fd(str, 1);
 }
 
-int			ft_s_null_minus(t_struct flgs, int count,const char *str)
+int			ft_s_null_minus(t_struct flgs, int count, const char *str)
 {
 	if (flgs.zero == 1)
 	{
@@ -55,7 +55,7 @@ int			ft_s_null_minus(t_struct flgs, int count,const char *str)
 int			ft_s_type(t_struct flgs, va_list args)
 {
 	const char	*str;
-	int		count;
+	int			count;
 
 	str = va_arg(args, const char *);
 	if (str == NULL)

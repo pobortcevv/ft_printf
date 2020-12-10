@@ -29,7 +29,7 @@ void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
 int				ft_isdigit(int c);
 char			*ft_strchr(const char *s, int c);
-int 			ft_strlen(const char *str);
+int				ft_strlen(const char *str);
 int				ft_strncmp(char *s1, char *s2, unsigned int n);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strnstr(char *str1, char *str2, size_t size);
