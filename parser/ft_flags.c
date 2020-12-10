@@ -43,6 +43,6 @@ t_struct	ft_dot_star_init(const char *str, t_struct flgs, int i,
 	else if (str[i] == '*')
 		flgs.dot_star = va_arg(args, int);
 	else
-		flgs.dot_star = -2;
+		flgs.dot_star = 0;
 	return (flgs);
 }

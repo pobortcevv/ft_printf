@@ -23,7 +23,7 @@ int		ft_type_init(t_struct flgs, va_list args)
 		i = ft_s_type(flgs, args);
 	else if (flgs.type == 'p')
 		i = ft_p_type(flgs, args);
-	else if (flgs.type == 'd' || flgs.type == 'i')
+	if (flgs.type == 'd' || flgs.type == 'i')
 		i = ft_di_type(flgs, args, i);
 	else if (flgs.type == 'u')
 		i = ft_u_type(flgs, args);
