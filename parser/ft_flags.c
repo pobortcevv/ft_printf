@@ -21,7 +21,7 @@ t_struct	ft_minus_init(t_struct flgs)
 
 t_struct	ft_width_init(const char *str, t_struct flgs, int i, va_list args)
 {
-	if (ft_isdigit(str[i]))
+	if (ft_isdigit(str[i]) && flgs.width == 0)
 		flgs.width = ft_atoi(&str[i]);
 	else if (str[i] == '*')
 	{
@@ -32,13 +32,14 @@ t_struct	ft_width_init(const char *str, t_struct flgs, int i, va_list args)
 			flgs = ft_minus_init(flgs);
 		}
 	}
+
 	return (flgs);
 }
 
 t_struct	ft_dot_star_init(const char *str, t_struct flgs, int i,
 								va_list args)
 {
-	if (ft_isdigit(str[++i]))
+	if (ft_isdigit(str[++i]) && flgs.dot_star == -1)
 		flgs.dot_star = ft_atoi(&str[i]);
 	else if (str[i] == '*')
 		flgs.dot_star = va_arg(args, int);

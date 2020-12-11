@@ -42,7 +42,7 @@ int			ft_parser(const char *str, int i, va_list args, int *count)
 			flgs = ft_minus_init(flgs);
 		else if (str[i] == '.')
 			flgs = ft_dot_star_init(str, flgs, i, args);
-		else if ((str[i] >= '1' && str[i] <= '9') || (str[i] == '*' && str[i - 1] != '.'))
+		else if (((str[i] >= '1' && str[i] <= '9') || (str[i] == '*' && str[i - 1] != '.')) && flgs.dot_star == -1)
 			flgs = ft_width_init(str, flgs, i, args);
 		else if (ft_isalpha(str[i]))
 			flgs.type = str[i];
@@ -60,7 +60,7 @@ int			ft_write_common(const char *str, va_list args, int i)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '%' && str[i + 1] != '\0')
+		if (str[i] == '%')
 			i = ft_parser(str, i + 1, args, &count) - 1;
 		else
 		{

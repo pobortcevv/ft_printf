@@ -26,7 +26,7 @@ int		ft_dot_star_u(unsigned int num, t_struct flgs, int count)
 	if (flgs.minus == 1)
 	{
 		ft_put_null_u(flgs.dot_star);
-		if (num != 0 || flgs.dot_star > 0)
+		if (count != 0 || flgs.dot_star > 0)
 			ft_putnbr16_fd(num, 1, "0123456789");
 	}
 	while (flgs.width > 0)
@@ -37,7 +37,7 @@ int		ft_dot_star_u(unsigned int num, t_struct flgs, int count)
 	if (flgs.minus == 0)
 	{
 		ft_put_null_u(flgs.dot_star);
-		if (num == 0 && flgs.dot_star <= 0)
+		if (count == 0 && flgs.dot_star <= 0)
 			return (count > flgs.lenght ? count : flgs.lenght);
 		ft_putnbr16_fd(num, 1, "0123456789");
 	}
@@ -79,7 +79,7 @@ int		ft_u_type(t_struct flgs, va_list args)
 		buff /= 10;
 		count++;
 	}
-	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star != -2)
+	if (num == 0 && flgs.dot_star != 0)
 		count = 1;
 	flgs.width -= count;
 	if (flgs.dot_star != -1)

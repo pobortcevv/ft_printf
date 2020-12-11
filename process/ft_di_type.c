@@ -40,20 +40,23 @@ int				ft_dot_star_di(long long num, t_struct flgs, int count)
 		flgs.width -= flgs.dot_star + count;
 	else
 		flgs.width -= count;
-	if (num < 0 && flgs.lenght > count && flgs.width < flgs.dot_star)
+//	printf("%d\n", flgs.lenght);
+//	printf("%d  <= %d\n", flgs.width, flgs.dot_star);
+	if (num < 0 && flgs.width <= flgs.dot_star && flgs.width != 0)
 		flgs.lenght++;
 	if (flgs.minus == 1)
 	{
 		num = ft_put_null_di(num, flgs.dot_star);
-		if (num != 0 || flgs.dot_star > 0)
+		if (count != 0 || flgs.dot_star > 0)
 			ft_putnbr_fd(num, 1);
 	}
+
 	ft_put_spaces(flgs);
 	if (flgs.minus == 0)
 	{
 		num = ft_put_null_di(num, flgs.dot_star);
-		if (num == 0 && flgs.dot_star <= 0)
-			return (flgs.lenght);
+		if (flgs.dot_star <= 0 && count == 0)
+			return (count > flgs.lenght ? count : flgs.lenght);
 		ft_putnbr_fd(num, 1);
 	}
 	return (count > flgs.lenght ? count : flgs.lenght);
@@ -86,7 +89,7 @@ int				ft_di_type(t_struct flgs, va_list args, int count)
 	long long	buff;
 
 	num = va_arg(args, int);
-	if (num == 0 && flgs.dot_star != 0 && flgs.dot_star > -2)
+	if (num == 0 && flgs.dot_star != 0)
 		count = 1;
 	buff = num;
 	if (buff < 0)
@@ -99,8 +102,10 @@ int				ft_di_type(t_struct flgs, va_list args, int count)
 		buff /= 10;
 		count++;
 	}
+
 	if (flgs.dot_star > -1)
 	{
+
 		count = ft_dot_star_di(num, flgs, count);
 		return (count > flgs.lenght ? count : flgs.lenght);
 	}
