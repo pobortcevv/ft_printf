@@ -32,7 +32,6 @@ t_struct	ft_width_init(const char *str, t_struct flgs, int i, va_list args)
 			flgs = ft_minus_init(flgs);
 		}
 	}
-
 	return (flgs);
 }
 

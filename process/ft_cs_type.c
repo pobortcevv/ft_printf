@@ -35,7 +35,6 @@ int			ft_s_null_minus(t_struct flgs, int count, const char *str)
 	}
 	while ((flgs.width)-- > 0)
 		ft_putchar_fd(' ', 1);
-
 	if (flgs.minus == 0)
 	{
 		if (flgs.dot_star < ft_strlen(str) && flgs.dot_star > 0)

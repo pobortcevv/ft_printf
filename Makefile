@@ -23,17 +23,18 @@ NAME		= libftprintf.a
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			#$(CC) $(CFLAGS) $(SRCS) $(LIBFILES)
+#			$(CC) $(CFLAGS) $(SRCS) $(LIBFILES)
+#			./a.out
 			make -C ./libft
 
 			cp libft/libft.a $(NAME)
 			ar rcs $(NAME) $(OBJS)
 clean:
 			$(RM) $(OBJS)
-			make clean -C libft
+			make fclean -C libft
 
 fclean:		clean
 			$(RM) $(NAME)
-			make clean -C libft
+			make fclean -C libft
 
 re:			fclean $(NAME)

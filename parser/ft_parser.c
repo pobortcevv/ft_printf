@@ -42,7 +42,8 @@ int			ft_parser(const char *str, int i, va_list args, int *count)
 			flgs = ft_minus_init(flgs);
 		else if (str[i] == '.')
 			flgs = ft_dot_star_init(str, flgs, i, args);
-		else if (((str[i] >= '1' && str[i] <= '9') || (str[i] == '*' && str[i - 1] != '.')) && flgs.dot_star == -1)
+		else if (((str[i] >= '1' && str[i] <= '9') ||
+		(str[i] == '*' && str[i - 1] != '.')) && flgs.dot_star == -1)
 			flgs = ft_width_init(str, flgs, i, args);
 		else if (ft_isalpha(str[i]))
 			flgs.type = str[i];
